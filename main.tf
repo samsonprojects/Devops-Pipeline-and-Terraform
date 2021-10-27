@@ -5,6 +5,16 @@ provider "azurerm" {
     features{}
 }
 
+#configuring terraform to use blob storage in azure to store our state file
+terraform {
+    backend "azurerm" {
+        resource_group_name = "tf_rg_blobstore"
+        storage_account_name = "tfstorageaccountskab"
+        container_name = "tfstate"
+        key = "terraform.tfstate"
+    }
+}
+
 resource "azurerm_resource_group" "tf_test" {
     name = "tfmainrg"
     location = "UK West"
